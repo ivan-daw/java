@@ -4,6 +4,7 @@
     Author     : ivan
 --%>
 
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,5 +14,21 @@
     </head>
     <body>
         <h1>Hello World en JSP!</h1>
+        <%
+            
+            Map<String, String[]> parameters = request.getParameterMap();
+            for (String parameter : parameters.keySet()) {
+
+                String[] values = parameters.get(parameter);
+                //out.println(StringEscapeUtils.escapeHtml4(values[0]));
+        %>
+        <h1>
+            <% 
+                out.println("<p style=color:"+parameter+";>"+values[0]+"</p>");
+            %>
+        </h1>
+        <%  }                      
+        %>
+            
     </body>
 </html>
