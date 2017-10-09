@@ -7,6 +7,7 @@ package daw.ivan.primerejemplo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +32,26 @@ public class Primero extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getWriter().println("Test");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        // response.getWriter().println("Test"); lo ignora antes daba error
+        //  String paginaDestino = "index.jsp";
+        String paginaDestino = Constantes.PAGINA_INDEX;
+        if (request.getParameterMap().isEmpty()) {
+            paginaDestino = Constantes.PAGINA_ERROR;
+            request.setAttribute(Constantes.ERROR, "No hay parametros");
+
+        } else {
+            for (String nombre : request.getParameterMap().keySet()) {
+                if (!Arrays.asList(Constantes.COLORES).contains(nombre)) {
+                    paginaDestino = Constantes.PAGINA_ERROR;
+
+                    request.setAttribute(Constantes.ERROR, "El parametro no es un color valido");
+                }
+
+            }
+
+        }
+
+        request.getRequestDispatcher(paginaDestino).forward(request, response);
     }
 
     //original

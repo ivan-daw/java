@@ -14,9 +14,10 @@
     </head>
     <body>
         <h1>Pagina de errores</h1>
-            <h2>
-        <%
-            out.println(request.getAttribute(Constantes.ERROR));
-            %></h2>
+        <h2>
+            <%
+                out.println(request.getAttribute(Constantes.ERROR));
+            %>
+        </h2>
     </body>
 </html>

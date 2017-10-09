@@ -15,7 +15,7 @@
     <body>
         <h1>Hello World en JSP!</h1>
         <%
-            
+
             Map<String, String[]> parameters = request.getParameterMap();
             for (String parameter : parameters.keySet()) {
 
@@ -23,12 +23,12 @@
                 //out.println(StringEscapeUtils.escapeHtml4(values[0]));
         %>
         <h1>
-            <% 
-                out.println("<h1 style=color:"+parameter+";>"+values[0]+"</h1>");
+            <%
+                out.println("<h1 style=color:" + parameter + ";>" + values[0] + "</h1>");
             %>
         </h1>
-        <%  }                      
+        <%  }
         %>
-            
+
     </body>
 </html>
