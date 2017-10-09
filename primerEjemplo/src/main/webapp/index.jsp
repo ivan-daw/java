@@ -24,7 +24,7 @@
         %>
         <h1>
             <% 
-                out.println("<p style=color:"+parameter+";>"+values[0]+"</p>");
+                out.println("<h1 style=color:"+parameter+";>"+values[0]+"</h1>");
             %>
         </h1>
         <%  }                      
