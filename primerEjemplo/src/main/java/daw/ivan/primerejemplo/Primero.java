@@ -32,8 +32,7 @@ public class Primero extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // response.getWriter().println("Test"); lo ignora antes daba error
-        //  String paginaDestino = "index.jsp";
+        
         String paginaDestino = Constantes.PAGINA_INDEX;
         if (request.getParameterMap().isEmpty()) {
             paginaDestino = Constantes.PAGINA_ERROR;
@@ -54,24 +53,6 @@ public class Primero extends HttpServlet {
         request.getRequestDispatcher(paginaDestino).forward(request, response);
     }
 
-    //original
-    /*response.setContentType("text/html;charset=UTF-8");
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-
- /*  out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Primero</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Primero at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-     */
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

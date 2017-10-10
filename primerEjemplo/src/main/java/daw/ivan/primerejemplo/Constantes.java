@@ -13,7 +13,7 @@ public class Constantes {
 
     public static final String PAGINA_INDEX = "index.jsp";
     public static final String PAGINA_ERROR = "error.jsp";
-    public static final String[] COLORES = new String[]{"yellow", "red", "blue", "pink", "green", "purple", "cyan", "orange", "black", "brown", "white", "teal", "aquamarine", "violet", "gray"};
+    public static final String[] COLORES = new String[]{"yellow", "red", "blue", "pink", "green"};
     public static final String ERROR = "mensajeError";
 
 }
