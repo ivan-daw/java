@@ -18,8 +18,8 @@ import utils.Constantes;
  *
  * @author user
  */
-@WebServlet(name = "Nivel3", urlPatterns = {"/Nivel3"})
-public class Nivel3 extends HttpServlet {
+@WebServlet(name = "N3", urlPatterns = {"/N3"})
+public class N3 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

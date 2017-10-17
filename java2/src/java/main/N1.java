@@ -18,8 +18,8 @@ import utils.Constantes;
  *
  * @author user
  */
-@WebServlet(name = "Nivel3", urlPatterns = {"/Nivel3"})
-public class Nivel3 extends HttpServlet {
+@WebServlet(name = "N1", urlPatterns = {"/N1"})
+public class N1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,40 +31,36 @@ public class Nivel3 extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String paginaDestino = Constantes.PAGINA_INDEX;
-        String pwd = request.getParameter("pwd");
-
-        if (request.getSession().getAttribute("signature") == null) {
-            paginaDestino = Constantes.PAGINA_ERROR;
-            request.setAttribute("mensajeError", "Tienes que empezar en el nivel1");
-            request.getRequestDispatcher(paginaDestino).forward(request, response);
-        } else {
-
-            if (request.getSession().getAttribute("password").equals("abc")
-                    && request.getSession().getAttribute("num1").equals("33")&& request.getSession().getAttribute("num2").equals("22")
-                    && request.getSession().getAttribute("num3").equals("11")) {
-                if (request.getSession().getAttribute("pwd") == null) {
-                    response.getWriter().println("<h1>Nivel3: Introduce pwd</h1>");
-                    request.getSession().setAttribute("pwd", pwd);
-                } else {
-                    if (request.getSession().getAttribute("pwd").equals("12ab")) {
-                        request.getRequestDispatcher(paginaDestino).forward(request, response);
-                    } else {
-
-                        paginaDestino = Constantes.PAGINA_ERROR;
-                        request.setAttribute("mensajeError", "PWD INCORRECTA");
-                        request.getRequestDispatcher(paginaDestino).forward(request, response);
-                    }
-
-                }
-            } else {
-                paginaDestino = Constantes.PAGINA_ERROR;
-                request.setAttribute("mensajeError", "NUMEROS INCORRECTOS");
-                request.getRequestDispatcher(paginaDestino).forward(request, response);
-            }
-        }
+      throws ServletException, IOException {
+       String paginaDestino = Constantes.PAGINA_INDEX;
+       Integer contador=10;
+       String Nivel1="no";
+        String password = request.getParameter("password");
+   Nivel1 = (String)request.getSession().getAttribute("Nivel1");
+        request.setAttribute("mensajeError", "Tienes que empezar en el nivel1");
+    
+       if (request.getSession().getAttribute("contador")== null)
+       {
+            contador = (Integer)request.getSession().getAttribute("contador");
+       }
+       
+       if (password==null){
+          request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel1 </h1> Introduce contraseña");
+           request.getRequestDispatcher(paginaDestino).forward(request, response);
+       }
+           if (password=="abc"){   
+               Nivel1="ok";
+      request.getSession().setAttribute("Nivel1", Nivel1);
+      request.getRequestDispatcher(paginaDestino).forward(request, response);
+           }else{
+               paginaDestino = Constantes.PAGINA_ERROR;
+               request.getRequestDispatcher(paginaDestino).forward(request, response);
+           }
+           
+           
+           
+       }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,7 +74,7 @@ public class Nivel3 extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+      throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -92,7 +88,7 @@ public class Nivel3 extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+      throws ServletException, IOException {
         processRequest(request, response);
     }
 

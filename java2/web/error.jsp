@@ -12,10 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Se ha producido un error</h1>
-        <h1><%   
-        
-        out.println(request.getAttribute("mensajeError"));
-        %></h1>
+        <h1>Se ha producido un error, vuelve a intentarlo!</h1>
+        <h1><%
+
+            out.println(request.getAttribute("mensajeError"));
+            %></h1>
     </body>
 </html>

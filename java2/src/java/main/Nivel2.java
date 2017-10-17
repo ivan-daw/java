@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.Constantes;
 
 /**
  *
@@ -33,21 +34,42 @@ public class Nivel2 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String paginaDestino = "Nivel3";
-        String numeros = request.getParameter("numeros");
+        //String numeros = request.getParameter("numeros");
+        String num1 = request.getParameter("num1");
+         String num2 = request.getParameter("num2");
+          String num3 = request.getParameter("num3");
+if  (request.getSession().getAttribute("signature") == null){
+     paginaDestino = Constantes.PAGINA_ERROR;
+            request.setAttribute("mensajeError", "Tienes que empezar en el nivel1");
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
+} else {
 
-        if (request.getSession().getAttribute("signature") != null && request.getSession().getAttribute("password").equals("abc"))  {
-            if (request.getSession().getAttribute("numeros") == null) {
-                response.getWriter().println("<h1>Nivel2: Introduce numeros</h1>");
-                request.getSession().setAttribute("numeros", numeros);
+        if( request.getSession().getAttribute("password").equals("abc"))  {
+            //if (request.getSession().getAttribute("numeros") == null) {
+            if (request.getSession().getAttribute("num1") == null) {
+                response.getWriter().println("<h1>Nivel2: Introduce el primer numero</h1>");
+               //    request.getSession().setAttribute("numeros", numeros);
+                request.getSession().setAttribute("num1", num1);
+                            if (request.getSession().getAttribute("num1") != null && request.getSession().getAttribute("num2") == null) {
+                response.getWriter().println("<h1>Nivel2: Introduce el segundo numero</h1>");
+                 request.getSession().setAttribute("num2", num2);
+                 
+                  if (request.getSession().getAttribute("num2") != null && request.getSession().getAttribute("num3") == null) {
+                response.getWriter().println("<h1>Nivel2: Introduce el tercer numero</h1>");
+                 request.getSession().setAttribute("num3", num3);}}
+
             } else {
 
                 request.getRequestDispatcher(paginaDestino).forward(request, response);
             }
         } else {
-            response.getWriter().println("<h1>Nivel2: PASSWORD INCORRECTA</h1>" + request.getSession().getAttribute("signature") + request.getSession().getAttribute("password")+ request.getSession().getAttribute("numeros"));
+            paginaDestino = Constantes.PAGINA_ERROR;
+            request.setAttribute("mensajeError", "PASSWORD INCORRECTA");
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
+
         }
     }
-
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

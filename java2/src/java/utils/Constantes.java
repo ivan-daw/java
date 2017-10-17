@@ -14,5 +14,7 @@ public class Constantes {
     public static final String PAGINA_INDEX = "index.jsp";
 
     public static final String PAGINA_ERROR = "error.jsp";
+        public static final String MSG_INFO = "mensajeInfo";
+            public static final String ERROR = "mensajeError";
 
 }
