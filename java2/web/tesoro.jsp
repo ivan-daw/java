@@ -25,7 +25,13 @@ if (nvm1.equal(rcpcm1)
     <body>
         
         <h1><%
-            out.println(request.getAttribute(Constantes.MSG_INFO));
+            //if(null == session.getAttribute("myattribute")
+            //session.getAttribute != null
+           if (request.getSession().getAttribute("Nivel1").equals("ok")
+                   && request.getSession().getAttribute("Nivel2").equals("ok")
+                   && request.getSession().getAttribute("Nivel3").equals("ok")){
+           out.println("Genial has abierto la caja");
+        }
             %></h1>
     </body>
 </html>

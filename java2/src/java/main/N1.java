@@ -6,7 +6,6 @@
 package main;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,22 +34,26 @@ public class N1 extends HttpServlet {
        String paginaDestino = Constantes.PAGINA_INDEX;
        Integer contador=10;
        String Nivel1="no";
+       
         String password = request.getParameter("password");
    Nivel1 = (String)request.getSession().getAttribute("Nivel1");
-        request.setAttribute("mensajeError", "Tienes que empezar en el nivel1");
+   
+
     
        if (request.getSession().getAttribute("contador")== null)
        {
-            contador = (Integer)request.getSession().getAttribute("contador");
+           request.getSession().setAttribute("contador", contador);
+           // contador = (Integer)request.getSession().getAttribute("contador");
        }
        
-       if (password==null){
+      if (password==null){
           request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel1 </h1> Introduce contraseña");
            request.getRequestDispatcher(paginaDestino).forward(request, response);
        }
-           if (password=="abc"){   
+           if (password.equals("abc")){   
                Nivel1="ok";
       request.getSession().setAttribute("Nivel1", Nivel1);
+          request.setAttribute(Constantes.MSG_INFO, "Pasado Nivel 1");
       request.getRequestDispatcher(paginaDestino).forward(request, response);
            }else{
                paginaDestino = Constantes.PAGINA_ERROR;
@@ -61,7 +64,7 @@ public class N1 extends HttpServlet {
            
        }
         
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
