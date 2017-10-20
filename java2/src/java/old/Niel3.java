@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package old;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +19,7 @@ import utils.Constantes;
  * @author user
  */
 @WebServlet(name = "Nivel3", urlPatterns = {"/Nivel3"})
-public class Nivel3 extends HttpServlet {
+public class Niel3 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,44 +33,38 @@ public class Nivel3 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          String paginaDestino = Constantes.PAGINA_INDEX;
+        String paginaDestino = Constantes.PAGINA_INDEX;
+        String pwd = request.getParameter("pwd");
 
-     
-       
-   String pwd = request.getParameter("pwd");
-   
-    
-       if (request.getSession().getAttribute(Constantes.NIVEL).equals("1110"))
-       {
-
-           request.setAttribute(Constantes.MSG_INFO,"<h1>Servlet Nivel3 </h1> Introduce la password");
-
-       } else {
-                   request.setAttribute("mensajeError", "Tienes que seguir el orden de los niveles");
-                   request.getRequestDispatcher(paginaDestino).forward(request, response);
-       }
-       
-       if (pwd.equals("12ab")){
-      request.getSession().setAttribute(Constantes.NIVEL, (Integer) 1110);
-       request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
-                        request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }else{
-               paginaDestino = Constantes.PAGINA_ERROR;
-               request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }
-            /*
-               if(null == request.getSession().getAttribute("Nivel1") || null == request.session.getAttribute("Nivel2") || null == session.getAttribute("Nivel3")){
-        request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
-    }
-           
-           if (request.getSession().getAttribute("Nivel1").equals("ok")
-                   && request.getSession().getAttribute("Nivel2").equals("ok")
-                   && request.getSession().getAttribute("Nivel3").equals("ok")){
-              request.setAttribute(Constantes.MSG_INFO,"Abriste la caja!");
+        if (request.getSession().getAttribute("signature") == null) {
+            paginaDestino = Constantes.PAGINA_ERROR;
+            request.setAttribute("mensajeError", "Tienes que empezar en el nivel1");
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
         } else {
-                 request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
-           }
-    }*/
+
+            if (request.getSession().getAttribute("password").equals("abc")
+                    && request.getSession().getAttribute("num1").equals("33")&& request.getSession().getAttribute("num2").equals("22")
+                    && request.getSession().getAttribute("num3").equals("11")) {
+                if (request.getSession().getAttribute("pwd") == null) {
+                    response.getWriter().println("<h1>Nivel3: Introduce pwd</h1>");
+                    request.getSession().setAttribute("pwd", pwd);
+                } else {
+                    if (request.getSession().getAttribute("pwd").equals("12ab")) {
+                        request.getRequestDispatcher(paginaDestino).forward(request, response);
+                    } else {
+
+                        paginaDestino = Constantes.PAGINA_ERROR;
+                        request.setAttribute("mensajeError", "PWD INCORRECTA");
+                        request.getRequestDispatcher(paginaDestino).forward(request, response);
+                    }
+
+                }
+            } else {
+                paginaDestino = Constantes.PAGINA_ERROR;
+                request.setAttribute("mensajeError", "NUMEROS INCORRECTOS");
+                request.getRequestDispatcher(paginaDestino).forward(request, response);
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

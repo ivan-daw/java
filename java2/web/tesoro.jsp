@@ -25,13 +25,19 @@ if (nvm1.equal(rcpcm1)
     <body>
         
         <h1><%
-            //if(null == session.getAttribute("myattribute")
+    if(null == session.getAttribute(Constantes.NIVEL)){
+          out.println("No vueles pajaro empieza por el nivel 1");
+    }
+    else {
             //session.getAttribute != null
-           if (request.getSession().getAttribute("Nivel1").equals("ok")
-                   && request.getSession().getAttribute("Nivel2").equals("ok")
-                   && request.getSession().getAttribute("Nivel3").equals("ok")){
+           if (request.getSession().getAttribute(Constantes.NIVEL).equals(1111))
+               {
            out.println("Genial has abierto la caja");
-        }
+           
+        } else {
+               out.println("No pasaste todos los niveles");
+           }
+    }
             %></h1>
     </body>
 </html>

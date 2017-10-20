@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package old;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,8 +18,8 @@ import utils.Constantes;
  *
  * @author user
  */
-@WebServlet(name = "Nivel3", urlPatterns = {"/Nivel3"})
-public class Nivel3 extends HttpServlet {
+@WebServlet(name = "Nivel1", urlPatterns = {"/Nivel1"})
+public class Niel1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,46 +31,28 @@ public class Nivel3 extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-          String paginaDestino = Constantes.PAGINA_INDEX;
-
-     
+      throws ServletException, IOException {
+       String paginaDestino = "Nivel2";
+        
+        int signature = (int)(Math.random()*100);
        
-   String pwd = request.getParameter("pwd");
-   
+       
+       
+        request.getSession().setAttribute("signature",signature); 
+          String password = request.getParameter("password");
     
-       if (request.getSession().getAttribute(Constantes.NIVEL).equals("1110"))
+       if (request.getSession().getAttribute("password")== null)
        {
-
-           request.setAttribute(Constantes.MSG_INFO,"<h1>Servlet Nivel3 </h1> Introduce la password");
-
-       } else {
-                   request.setAttribute("mensajeError", "Tienes que seguir el orden de los niveles");
-                   request.getRequestDispatcher(paginaDestino).forward(request, response);
+            response.getWriter().println("<h1>Nivel1: Introduce contraseña</h1>");
+          request.getSession().setAttribute("password",password); 
+       }
+       else {
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
        }
        
-       if (pwd.equals("12ab")){
-      request.getSession().setAttribute(Constantes.NIVEL, (Integer) 1110);
-       request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
-                        request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }else{
-               paginaDestino = Constantes.PAGINA_ERROR;
-               request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }
-            /*
-               if(null == request.getSession().getAttribute("Nivel1") || null == request.session.getAttribute("Nivel2") || null == session.getAttribute("Nivel3")){
-        request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
-    }
-           
-           if (request.getSession().getAttribute("Nivel1").equals("ok")
-                   && request.getSession().getAttribute("Nivel2").equals("ok")
-                   && request.getSession().getAttribute("Nivel3").equals("ok")){
-              request.setAttribute(Constantes.MSG_INFO,"Abriste la caja!");
-        } else {
-                 request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
-           }
-    }*/
+        response.getWriter().println(signature);
+       response.getWriter().println(password);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,7 +66,7 @@ public class Nivel3 extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+      throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -98,7 +80,7 @@ public class Nivel3 extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+      throws ServletException, IOException {
         processRequest(request, response);
     }
 

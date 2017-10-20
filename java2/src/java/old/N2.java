@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package old;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -41,7 +41,6 @@ public class N2 extends HttpServlet {
         Integer option = (Integer) request.getSession().getAttribute("contador");
 
         if (request.getSession().getAttribute("Nivel1").equals("ok")) {
-            response.getWriter().println(option);
 
             switch (option) {
                 case 10:

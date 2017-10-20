@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package old;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,8 +18,8 @@ import utils.Constantes;
  *
  * @author user
  */
-@WebServlet(name = "N3", urlPatterns = {"/N3"})
-public class N3 extends HttpServlet {
+@WebServlet(name = "Nivel2", urlPatterns = {"/Nivel2"})
+public class Niel2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,37 +33,43 @@ public class N3 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          String paginaDestino = Constantes.PAGINA_INDEX;
+        String paginaDestino = "Nivel3";
+        //String numeros = request.getParameter("numeros");
+        String num1 = request.getParameter("num1");
+         String num2 = request.getParameter("num2");
+          String num3 = request.getParameter("num3");
+if  (request.getSession().getAttribute("signature") == null){
+     paginaDestino = Constantes.PAGINA_ERROR;
+            request.setAttribute("mensajeError", "Tienes que empezar en el nivel1");
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
+} else {
 
-       String Nivel3="no";
-       
-   //Nivel3 = (String)request.getSession().getAttribute("Nivel2");
-   String pwd = request.getParameter("pwd");
-   
-    
-       if (request.getSession().getAttribute("Nivel1").equals("ok")&& request.getSession().getAttribute("Nivel2").equals("ok"))
-       {
+        if( request.getSession().getAttribute("password").equals("abc"))  {
+            //if (request.getSession().getAttribute("numeros") == null) {
+            if (request.getSession().getAttribute("num1") == null) {
+                response.getWriter().println("<h1>Nivel2: Introduce el primer numero</h1>");
+               //    request.getSession().setAttribute("numeros", numeros);
+                request.getSession().setAttribute("num1", num1);
+                            if (request.getSession().getAttribute("num1") != null && request.getSession().getAttribute("num2") == null) {
+                response.getWriter().println("<h1>Nivel2: Introduce el segundo numero</h1>");
+                 request.getSession().setAttribute("num2", num2);
+                 
+                  if (request.getSession().getAttribute("num2") != null && request.getSession().getAttribute("num3") == null) {
+                response.getWriter().println("<h1>Nivel2: Introduce el tercer numero</h1>");
+                 request.getSession().setAttribute("num3", num3);}}
 
-           request.setAttribute(Constantes.MSG_INFO,"<h1>Servlet Nivel3 </h1> Introduce la password");
+            } else {
 
-       } else {
-                   request.setAttribute("mensajeError", "Tienes que seguir el orden de los niveles");
-                   request.getRequestDispatcher(paginaDestino).forward(request, response);
-       }
-       
-       if (pwd.equals("12ab")){
-               Nivel3="ok";
-      request.getSession().setAttribute("Nivel3", Nivel3);
-       request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
-                        request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }else{
-               paginaDestino = Constantes.PAGINA_ERROR;
-               request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }
-            
-           
+                request.getRequestDispatcher(paginaDestino).forward(request, response);
+            }
+        } else {
+            paginaDestino = Constantes.PAGINA_ERROR;
+            request.setAttribute("mensajeError", "PASSWORD INCORRECTA");
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
+
+        }
     }
-
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

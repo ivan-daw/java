@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package old;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +18,8 @@ import utils.Constantes;
  *
  * @author user
  */
-@WebServlet(name = "N1", urlPatterns = {"/N1"})
-public class N1 extends HttpServlet {
+@WebServlet(name = "N3", urlPatterns = {"/N3"})
+public class N3 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,41 +31,49 @@ public class N1 extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-       String paginaDestino = Constantes.PAGINA_INDEX;
-       Integer contador=10;
-       String Nivel1="no";
-       
-        String password = request.getParameter("password");
-   Nivel1 = (String)request.getSession().getAttribute("Nivel1");
-   
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+          String paginaDestino = Constantes.PAGINA_INDEX;
 
+       String Nivel3="no";
+       
+   //Nivel3 = (String)request.getSession().getAttribute("Nivel2");
+   String pwd = request.getParameter("pwd");
+   
     
-       if (request.getSession().getAttribute("contador")== null)
+       if (request.getSession().getAttribute("Nivel1").equals("ok")&& request.getSession().getAttribute("Nivel2").equals("ok"))
        {
-           request.getSession().setAttribute("contador", contador);
-           // contador = (Integer)request.getSession().getAttribute("contador");
+
+           request.setAttribute(Constantes.MSG_INFO,"<h1>Servlet Nivel3 </h1> Introduce la password");
+
+       } else {
+                   request.setAttribute("mensajeError", "Tienes que seguir el orden de los niveles");
+                   request.getRequestDispatcher(paginaDestino).forward(request, response);
        }
        
-      if (password==null){
-          request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel1 </h1> Introduce contraseña");
-           request.getRequestDispatcher(paginaDestino).forward(request, response);
-       }
-           if (password.equals("abc")){   
-               Nivel1="ok";
-      request.getSession().setAttribute("Nivel1", Nivel1);
-          request.setAttribute(Constantes.MSG_INFO, "Pasado Nivel 1");
-      request.getRequestDispatcher(paginaDestino).forward(request, response);
+       if (pwd.equals("12ab")){
+               Nivel3="ok";
+      request.getSession().setAttribute("Nivel3", Nivel3);
+       request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
+                        request.getRequestDispatcher(paginaDestino).forward(request, response);
            }else{
                paginaDestino = Constantes.PAGINA_ERROR;
                request.getRequestDispatcher(paginaDestino).forward(request, response);
            }
+            /*
+               if(null == request.getSession().getAttribute("Nivel1") || null == request.session.getAttribute("Nivel2") || null == session.getAttribute("Nivel3")){
+        request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
+    }
            
-           
-           
-       }
-        
-    
+           if (request.getSession().getAttribute("Nivel1").equals("ok")
+                   && request.getSession().getAttribute("Nivel2").equals("ok")
+                   && request.getSession().getAttribute("Nivel3").equals("ok")){
+              request.setAttribute(Constantes.MSG_INFO,"Abriste la caja!");
+        } else {
+                 request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
+           }
+    }*/
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -77,7 +86,7 @@ public class N1 extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -91,7 +100,7 @@ public class N1 extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 

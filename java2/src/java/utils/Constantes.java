@@ -16,5 +16,7 @@ public class Constantes {
     public static final String PAGINA_ERROR = "error.jsp";
         public static final String MSG_INFO = "mensajeInfo";
             public static final String ERROR = "mensajeError";
+                        public static final String NIVEL = "nivel";
+                        public static final String COMPROBADOR = "comprobador";
 
 }

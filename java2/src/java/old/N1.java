@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package old;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -17,11 +17,8 @@ import utils.Constantes;
  *
  * @author user
  */
-@WebServlet(name = "Primero", urlPatterns
-  = {
-      "/primero"
-  })
-public class Primero extends HttpServlet {
+@WebServlet(name = "N1", urlPatterns = {"/N1"})
+public class N1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,24 +31,40 @@ public class Primero extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-        String paginaDestino = Constantes.PAGINA_INDEX;
+       String paginaDestino = Constantes.PAGINA_INDEX;
+       Integer contador=10;
+       String Nivel1="no";
+       
+        String password = request.getParameter("password");
+   Nivel1 = (String)request.getSession().getAttribute("Nivel1");
+   
 
-        if (request.getParameterMap().isEmpty()) {
-            paginaDestino = Constantes.PAGINA_ERROR;
-            request.setAttribute("mensajeError", "No hay parametros");
-        } else {
-            for (String nombre : request.getParameterMap().keySet()) {
-                if (nombre.contains("r")) {
-                    request.getParameter(nombre);
-                    paginaDestino = Constantes.PAGINA_ERROR;
-                    request.setAttribute("mensajeError", "Parametro con r");
-                }
-            }
-        }
-
-        request.getRequestDispatcher(paginaDestino).forward(request, response);
-
-    }
+    
+       if (request.getSession().getAttribute("contador")== null)
+       {
+           request.getSession().setAttribute("contador", contador);
+           // contador = (Integer)request.getSession().getAttribute("contador");
+       }
+       
+      if (password==null){
+          request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel1 </h1> Introduce contraseña");
+           request.getRequestDispatcher(paginaDestino).forward(request, response);
+       }
+           if (password.equals("abc")){   
+               Nivel1="ok";
+      request.getSession().setAttribute("Nivel1", Nivel1);
+          request.setAttribute(Constantes.MSG_INFO, "Pasado Nivel 1");
+      request.getRequestDispatcher(paginaDestino).forward(request, response);
+           }else{
+               paginaDestino = Constantes.PAGINA_ERROR;
+               request.getRequestDispatcher(paginaDestino).forward(request, response);
+           }
+           
+           
+           
+       }
+        
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -6,7 +6,6 @@
 package main;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,28 +31,44 @@ public class Nivel1 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-       String paginaDestino = "Nivel2";
-        
-        int signature = (int)(Math.random()*100);
+       String paginaDestino = Constantes.PAGINA_INDEX;
+       //1º digito comprobador activado en nivel 1
+       //2º 1=nivel 1 pasado
+       //3º 1=nivel 2 pasado
+       //4º 1=nivel 3 pasado
        
+       Integer nivel=0000;
+
        
-       
-        request.getSession().setAttribute("signature",signature); 
-          String password = request.getParameter("password");
+        String password = request.getParameter("password");
+ 
+  
     
-       if (request.getSession().getAttribute("password")== null)
+       if (request.getSession().getAttribute(Constantes.NIVEL)== null)
        {
-            response.getWriter().println("<h1>Nivel1: Introduce contraseña</h1>");
-          request.getSession().setAttribute("password",password); 
-       }
-       else {
-            request.getRequestDispatcher(paginaDestino).forward(request, response);
+           request.getSession().setAttribute(Constantes.NIVEL, nivel);
+           // contador = (Integer)request.getSession().getAttribute("contador");
        }
        
-        response.getWriter().println(signature);
-       response.getWriter().println(password);
+      if (password==null){
+          request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel1 </h1> Introduce contraseña");
+           request.getRequestDispatcher(paginaDestino).forward(request, response);
+       }
+           if (password.equals("abc")){   
+               nivel=1000;
+      request.getSession().setAttribute(Constantes.NIVEL, nivel);
+          request.setAttribute(Constantes.MSG_INFO, "Pasado Nivel 1");
+      request.getRequestDispatcher(paginaDestino).forward(request, response);
+           }else{
+               paginaDestino = Constantes.PAGINA_ERROR;
+               request.getRequestDispatcher(paginaDestino).forward(request, response);
+           }
+           
+           
+           
+       }
         
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
