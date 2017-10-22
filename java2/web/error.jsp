@@ -4,6 +4,7 @@
     Author     : user
 --%>
 
+<%@page import="utils.Constantes"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,10 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Se ha producido un error, vuelve a intentarlo!</h1>
-        <h1><%
+        <h1>Se ha producido un error, vuelve a empezar desde el nivel1!</h1>
+        <%--
 
-            out.println(request.getAttribute("mensajeError"));
-            %></h1>
+            out.println(request.getAttribute(Constantes.ERROR));
+           --%>
     </body>
 </html>

@@ -44,18 +44,18 @@ public class Nivel1 extends HttpServlet {
  
   
     
-       if (request.getSession().getAttribute(Constantes.NIVEL)== null)
+       if (request.getSession().getAttribute(Constantes.NIVEL)!= null)
        {
-           request.getSession().setAttribute(Constantes.NIVEL, nivel);
-           // contador = (Integer)request.getSession().getAttribute("contador");
+           request.getSession().invalidate();
        }
-       
+ 
       if (password==null){
-          request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel1 </h1> Introduce contraseña");
+          request.setAttribute(Constantes.MSG_INFO, "Nivel1: Introduce contraseña");
            request.getRequestDispatcher(paginaDestino).forward(request, response);
-       }
-           if (password.equals("abc")){   
+       } else {
+           if (password.equals(Constantes.PWD1)){   
                nivel=1000;
+               
       request.getSession().setAttribute(Constantes.NIVEL, nivel);
           request.setAttribute(Constantes.MSG_INFO, "Pasado Nivel 1");
       request.getRequestDispatcher(paginaDestino).forward(request, response);
@@ -65,7 +65,7 @@ public class Nivel1 extends HttpServlet {
            }
            
            
-           
+      }
        }
         
     

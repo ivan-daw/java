@@ -25,6 +25,9 @@ if (nvm1.equal(rcpcm1)
     <body>
         
         <h1><%
+            out.println(request.getSession().getAttribute(Constantes.NIVEL));
+             out.println(request.getSession().getAttribute(Constantes.COMPROBADOR));
+             out.println();
     if(null == session.getAttribute(Constantes.NIVEL)){
           out.println("No vueles pajaro empieza por el nivel 1");
     }
@@ -35,6 +38,7 @@ if (nvm1.equal(rcpcm1)
            out.println("Genial has abierto la caja");
            
         } else {
+               
                out.println("No pasaste todos los niveles");
            }
     }

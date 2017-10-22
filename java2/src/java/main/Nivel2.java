@@ -37,7 +37,25 @@ public class Nivel2 extends HttpServlet {
 
       
         String nums = request.getParameter("nums");
-          if (request.getSession().getAttribute(Constantes.COMPROBADOR)== null)
+        
+        //Filto comprueba que se ha pasasdo el nivel 1 y que no se ha accedido directamente a este Nivel sin pasar por el 1
+  
+        if ((request.getSession().getAttribute(Constantes.NIVEL)== null) || !request.getSession().getAttribute(Constantes.NIVEL).equals(1000)){
+               
+               //request.setAttribute("mensajeError", "Tienes que empezar en el nivel1111" );
+                   paginaDestino = Constantes.PAGINA_ERROR;
+               request.getSession().invalidate();
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
+//        if (request.getSession().getAttribute(Constantes.NIVEL).equals(1000)) {
+
+                
+
+            
+        } else {
+            
+            //Atributo temporal de la sesion para que en cada peticion pida y compruebe un parametro
+            
+             if (request.getSession().getAttribute(Constantes.COMPROBADOR)== null)
        {
              request.getSession().setAttribute(Constantes.COMPROBADOR, (Integer) 1);
            // contador = (Integer)request.getSession().getAttribute("contador");
@@ -45,45 +63,50 @@ public class Nivel2 extends HttpServlet {
       
         Integer option = (Integer) request.getSession().getAttribute(Constantes.COMPROBADOR);
         
-        if (request.getSession().getAttribute(Constantes.NIVEL).equals(1000)) {
-
             switch (option) {
                 case 1:
-                    request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel2 </h1> Introduce el primer numero");
+                    request.setAttribute(Constantes.MSG_INFO, "Nivel2: Introduce el primer numero");
                     request.getSession().setAttribute(Constantes.COMPROBADOR, (Integer) 2);
                     request.getRequestDispatcher(paginaDestino).forward(request, response);
+                    
                     break;
                 case 2:
-                    if (nums.equals("11")) {
-                        request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel2 </h1> Introduce el segundo numero");
+                    if (nums.equals(Constantes.PWD2_1)) {
+                        request.setAttribute(Constantes.MSG_INFO, "Nivel2: Introduce el segundo numero");
                         request.getSession().setAttribute(Constantes.COMPROBADOR, (Integer) 3);
                         request.getRequestDispatcher(paginaDestino).forward(request, response);
 
                     } else {
                         paginaDestino = Constantes.PAGINA_ERROR;
+                        request.getSession().invalidate();
                         request.getRequestDispatcher(paginaDestino).forward(request, response);
                     }
 
                     break;
 
                 case 3:
-                       if (nums.equals("22")) {
-                    request.setAttribute(Constantes.MSG_INFO, "<h1>Servlet Nivel2 </h1> Introduce eltercer numero");
+                       if (nums.equals(Constantes.PWD2_2)) {
+                    request.setAttribute(Constantes.MSG_INFO, "Nivel2: Introduce el tercer numero");
                     request.getSession().setAttribute(Constantes.COMPROBADOR, (Integer) 4);
                     request.getRequestDispatcher(paginaDestino).forward(request, response);
                       } else {
                         paginaDestino = Constantes.PAGINA_ERROR;
+                         request.getSession().invalidate();
                         request.getRequestDispatcher(paginaDestino).forward(request, response);
                     }
                     break;
                 case 4:
 
-                    if (nums.equals("33")) {
+                    if (nums.equals(Constantes.PWD2_3)) {
                         request.getSession().setAttribute(Constantes.NIVEL, (Integer) 1110);
+                       
+                    //Al completar el nivel eliminamos el atributo temporal COMPROBAR de la session
+                        request.getSession().removeAttribute(Constantes.COMPROBADOR);
                         request.setAttribute(Constantes.MSG_INFO, "Nivel 2 pasado");
                         request.getRequestDispatcher(paginaDestino).forward(request, response);
                     } else {
                         paginaDestino = Constantes.PAGINA_ERROR;
+                         request.getSession().invalidate();
                         request.getRequestDispatcher(paginaDestino).forward(request, response);
                     }
                     ;
@@ -91,15 +114,12 @@ public class Nivel2 extends HttpServlet {
 
                 default:
                     paginaDestino = Constantes.PAGINA_ERROR;
+                    request.getSession().invalidate();
                     request.getRequestDispatcher(paginaDestino).forward(request, response);
                     break;
-
-            }
-        } else {
-            request.setAttribute("mensajeError", "Tienes que empezar en el nivel1");
-            request.getRequestDispatcher(paginaDestino).forward(request, response);
         }
 
+    }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

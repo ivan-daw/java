@@ -33,32 +33,37 @@ public class Nivel3 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          String paginaDestino = Constantes.PAGINA_INDEX;
+        String paginaDestino = Constantes.PAGINA_INDEX;
 
-     
-       
-   String pwd = request.getParameter("pwd");
-   
-    
-       if (request.getSession().getAttribute(Constantes.NIVEL).equals("1110"))
-       {
+        String pwd = request.getParameter("pwd");
 
-           request.setAttribute(Constantes.MSG_INFO,"<h1>Servlet Nivel3 </h1> Introduce la password");
+         //Filto comprueba que se ha pasasdo el nivel 1 y 2 ademas de que no se ha accedido directamente a este Nivel sin pasar por los demas
+  
+        if ((request.getSession().getAttribute(Constantes.NIVEL) == null) || !request.getSession().getAttribute(Constantes.NIVEL).equals(1110)) {
+            paginaDestino = Constantes.PAGINA_ERROR;
+            request.getSession().invalidate();
+            //request.setAttribute("mensajeError", "Tienes que seguir el orden de los niveles");
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
 
-       } else {
-                   request.setAttribute("mensajeError", "Tienes que seguir el orden de los niveles");
-                   request.getRequestDispatcher(paginaDestino).forward(request, response);
-       }
-       
-       if (pwd.equals("12ab")){
-      request.getSession().setAttribute(Constantes.NIVEL, (Integer) 1110);
-       request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
-                        request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }else{
-               paginaDestino = Constantes.PAGINA_ERROR;
-               request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }
-            /*
+        } else {
+
+            if (pwd == null) {
+                request.setAttribute(Constantes.MSG_INFO, "Nivel3: Introduce la password");
+                request.getRequestDispatcher(paginaDestino).forward(request, response);
+            } else {
+                if (pwd.equals(Constantes.PWD3)) {
+                    request.getSession().setAttribute(Constantes.NIVEL, (Integer) 1111);
+                    request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
+                    request.getRequestDispatcher(paginaDestino).forward(request, response);
+                } else {
+                    paginaDestino = Constantes.PAGINA_ERROR;
+                    request.getSession().invalidate();
+                    request.getRequestDispatcher(paginaDestino).forward(request, response);
+                }
+
+            }
+        }
+        /*
                if(null == request.getSession().getAttribute("Nivel1") || null == request.session.getAttribute("Nivel2") || null == session.getAttribute("Nivel3")){
         request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
     }
