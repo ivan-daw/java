@@ -57,9 +57,15 @@ public class Nivel2 extends HttpServlet {
             
              if (request.getSession().getAttribute(Constantes.COMPROBADOR)== null)
        {
+           if(nums.equals(null)){
              request.getSession().setAttribute(Constantes.COMPROBADOR, (Integer) 1);
+           }else{
+                 request.getSession().setAttribute(Constantes.COMPROBADOR, (Integer) 2);
+             }
+           
            // contador = (Integer)request.getSession().getAttribute("contador");
        }
+            
       
         Integer option = (Integer) request.getSession().getAttribute(Constantes.COMPROBADOR);
         

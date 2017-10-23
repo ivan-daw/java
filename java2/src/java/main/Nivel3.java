@@ -54,6 +54,8 @@ public class Nivel3 extends HttpServlet {
                 if (pwd.equals(Constantes.PWD3)) {
                     request.getSession().setAttribute(Constantes.NIVEL, (Integer) 1111);
                     request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
+                   
+                
                     request.getRequestDispatcher(paginaDestino).forward(request, response);
                 } else {
                     paginaDestino = Constantes.PAGINA_ERROR;
