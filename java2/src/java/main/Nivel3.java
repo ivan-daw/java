@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import utils.Constantes;
 
 /**
- *
- * @author user
+ * @author Ivan *
  */
 @WebServlet(name = "Nivel3", urlPatterns = {"/Nivel3"})
 public class Nivel3 extends HttpServlet {
@@ -32,52 +25,42 @@ public class Nivel3 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         String paginaDestino = Constantes.PAGINA_INDEX;
-
         String pwd = request.getParameter("pwd");
 
-         //Filto comprueba que se ha pasasdo el nivel 1 y 2 ademas de que no se ha accedido directamente a este Nivel sin pasar por los demas
-  
-        if ((request.getSession().getAttribute(Constantes.NIVEL) == null) || !request.getSession().getAttribute(Constantes.NIVEL).equals(1110)) {
+        //Filtro comprueba que se ha pasado el nivel 1 y 2 ademas de que no se ha accedido directamente a este Nivel sin pasar por los demas
+        if ((request.getSession().getAttribute(Constantes.NIVEL) == null)
+                || !request.getSession().getAttribute(Constantes.NIVEL).equals(1110)) {
+
             paginaDestino = Constantes.PAGINA_ERROR;
-            request.getSession().invalidate();
-            //request.setAttribute("mensajeError", "Tienes que seguir el orden de los niveles");
             request.getRequestDispatcher(paginaDestino).forward(request, response);
 
         } else {
 
             if (pwd == null) {
-                request.setAttribute(Constantes.MSG_INFO, "Nivel3: Introduce la password");
+
+                paginaDestino = Constantes.PAGINA_ERROR;
                 request.getRequestDispatcher(paginaDestino).forward(request, response);
+
             } else {
+
                 if (pwd.equals(Constantes.PWD3)) {
+
                     request.getSession().setAttribute(Constantes.NIVEL, (Integer) 1111);
                     request.setAttribute(Constantes.MSG_INFO, "Nivel 3 pasado");
-                   
-                
                     request.getRequestDispatcher(paginaDestino).forward(request, response);
+
                 } else {
+
                     paginaDestino = Constantes.PAGINA_ERROR;
-                    request.getSession().invalidate();
                     request.getRequestDispatcher(paginaDestino).forward(request, response);
+
                 }
 
             }
         }
-        /*
-               if(null == request.getSession().getAttribute("Nivel1") || null == request.session.getAttribute("Nivel2") || null == session.getAttribute("Nivel3")){
-        request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
-    }
-           
-           if (request.getSession().getAttribute("Nivel1").equals("ok")
-                   && request.getSession().getAttribute("Nivel2").equals("ok")
-                   && request.getSession().getAttribute("Nivel3").equals("ok")){
-              request.setAttribute(Constantes.MSG_INFO,"Abriste la caja!");
-        } else {
-                 request.setAttribute(Constantes.MSG_INFO,"No pasaste por todos los niveles");
-           }
-    }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

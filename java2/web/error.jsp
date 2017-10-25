@@ -4,6 +4,8 @@
     Author     : user
 --%>
 
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <%@page import="utils.Constantes"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,10 +15,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Se ha producido un error, vuelve a empezar desde el nivel1!</h1>
-        <%--
+        <h1 style="color: green">Caja de seguridad</h1>
+       <h3 style="color:red">Se ha producido un error, tendras que empezar desde el principio.</h3>
+       <c:set var = "nivel" scope = "session" value = "0000"/>
 
-            out.println(request.getAttribute(Constantes.ERROR));
-           --%>
     </body>
 </html>

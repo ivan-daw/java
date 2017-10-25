@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
 import java.io.IOException;
@@ -14,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import utils.Constantes;
 
 /**
- *
- * @author user
+ * @author Ivan *
  */
 @WebServlet(name = "Nivel1", urlPatterns = {"/Nivel1"})
 public class Nivel1 extends HttpServlet {
@@ -26,49 +20,46 @@ public class Nivel1 extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+     * @throws ServletException if a servlet-s pecific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-       String paginaDestino = Constantes.PAGINA_INDEX;
-       //1º digito comprobador activado en nivel 1
-       //2º 1=nivel 1 pasado
-       //3º 1=nivel 2 pasado
-       //4º 1=nivel 3 pasado
-       
-       Integer nivel=0000;
+            throws ServletException, IOException {
 
-       
+        response.setContentType("text/html;charset=UTF-8");
+        String paginaDestino = Constantes.PAGINA_INDEX;
+        Integer nivel = 0000;
         String password = request.getParameter("password");
- 
-  
-    
-       if (request.getSession().getAttribute(Constantes.NIVEL)!= null)
-       {
-           request.getSession().invalidate();
-       }
- 
-      if (password==null){
-          request.setAttribute(Constantes.MSG_INFO, "Nivel1: Introduce contraseña");
-           request.getRequestDispatcher(paginaDestino).forward(request, response);
-       } else {
-           if (password.equals(Constantes.PWD1)){   
-               nivel=1000;
-               
-      request.getSession().setAttribute(Constantes.NIVEL, nivel);
-          request.setAttribute(Constantes.MSG_INFO, "Pasado Nivel 1");
-      request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }else{
-               paginaDestino = Constantes.PAGINA_ERROR;
-               request.getRequestDispatcher(paginaDestino).forward(request, response);
-           }
-           
-           
-      }
-       }
-        
-    
+
+        //Si existe una sesion anterior la invalida
+        if (request.getSession().getAttribute(Constantes.NIVEL) != null) {
+            
+            request.getSession().invalidate();
+            
+        }
+
+        if (password == null) {
+
+            paginaDestino = Constantes.PAGINA_ERROR;
+            request.getRequestDispatcher(paginaDestino).forward(request, response);
+
+        } else {
+
+            if (password.equals(Constantes.PWD1)) {
+                
+                nivel = 1000;
+                request.getSession().setAttribute(Constantes.NIVEL, nivel);
+                request.setAttribute(Constantes.MSG_INFO, "Pasado Nivel 1");
+                request.getRequestDispatcher(paginaDestino).forward(request, response);
+
+            } else {
+
+                paginaDestino = Constantes.PAGINA_ERROR;
+                request.getRequestDispatcher(paginaDestino).forward(request, response);
+                
+            }
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -81,7 +72,7 @@ public class Nivel1 extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -95,7 +86,7 @@ public class Nivel1 extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
