@@ -18,15 +18,9 @@
             
             function cargarAlumno(id,nombre,fecha,mayor){
                document.getElementById("nombre").value=nombre;
+               document.getElementById("fecha").value=fecha;
               document.getElementById("idalumno").value=id;
                 
-            }
-            
-            function cargarNotas(id,nombre,curso,ciclo){
-                 document.getElementById("nombrenot").value=nombre;
-              document.getElementById("idnot").value=id;
-                document.getElementById("nombrenot").value=curso;
-                  document.getElementById("nombrenot").value=ciclo;
             }
             </script>
     </head>
@@ -40,6 +34,7 @@
                     <input type="button" value="cargar ${alumno.id}" 
                            onclick="cargarAlumno('${alumno.id}',
                            '${alumno.nombre}',
+                           
                                        '<fmt:formatDate value="${alumno.fecha_nacimiento}" pattern="dd-MM-yyyy"/>',
                                        ${alumno.mayor_edad});"/>
                 </td> 
@@ -53,30 +48,7 @@
 
                 <td>
                     <input type="checkbox" <c:if test="${alumno.mayor_edad}" >checked</c:if> />
-                </td>
-            </tr>
-        
-          
-        </c:forEach> 
-            
-                    <c:forEach items="${asignaturas}" var="asignaturas">  
-            <tr>
-                <td>
-                    <input type="button" value="cargar ${asignaturas.id}" 
-                           onclick="cargarAlumno('${asignaturas.id}',
-                           '${asignaturas.nombre}','${asignaturas.curso}',
-                           '${asignaturas.ciclo}'
-                                     "/>
-                </td> 
-                <td>
-                    ${asignaturas.nombre}
-                </td>
-                                <td>
-                    ${asignaturas.curso}
-                </td>
-                                <td>
-                    ${asignaturas.ciclo}
-                </td>
+                </td>       
             </tr>
         
           
@@ -87,11 +59,13 @@
             <input type="hidden" id="idalumno" />
         <input type="text" id="nombre" size="12"/>
          <input type="text" id="fecha" size="12"/>
-          <input type="text" id="nombre" size="12"/>
-          <br>
-            <input type="text" id="nombrenot" size="12"/>
-         <input type="text" id="ciclo" size="12"/>
-          <input type="text" id="curso" size="12"/>
+         <br>
+         <!--servelets alumnos.java-->
+         <button onclick="myFunc()">Listar</button>
+         <button onclick="myFunction()">Insert</button>
+         <button onclick="myFunction()">Update</button>
+         <button onclick="myFunction()">Delete</button>                 
+         
         </form>
     </body>
 </html>
