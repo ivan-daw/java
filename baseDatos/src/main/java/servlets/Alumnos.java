@@ -21,6 +21,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Alumno;
 import servicios.AlumnosServicios;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -42,30 +48,55 @@ public class Alumnos extends HttpServlet {
             throws ServletException, IOException {
 
         
-             
+
        
       
          AlumnosServicios as = new AlumnosServicios();
+     
         String op = request.getParameter("op");
-         op = "GETALL";
+             if (op==null) op="listar";
         switch (op) {
-            case "GETALL":
+            case "listar":
                
                 request.setAttribute("alumnos", as.getAllAlumnos());
                 request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
                 break;
-            case "INSERT":
+            case "insertar":
                 Alumno a = new Alumno();
-                a.setNombre("NOMBRE NUEVO"+LocalDateTime.now().toString());
+                a.setNombre(request.getParameter("nombre"));
                 LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
                 a.setFecha_nacimiento(Date.from(local.atStartOfDay().toInstant(ZoneOffset.UTC)));
-                a.setMayor_edad(Boolean.TRUE);
+                a.setMayor_edad( Boolean.valueOf(request.getParameter("mayor"))); //parse a boleean
                 a = as.addAlumno(a);
                 List<Alumno> alumnos = new ArrayList();
                 alumnos.add(a);
                 request.setAttribute("alumnos",alumnos);
                 request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
                 break;     
+                
+            case "update":
+                     response.setContentType("text/html"); 
+    PrintWriter pw=response.getWriter();    
+//             for  (String nombre : request.getParameterMap().keySet()){
+//                 String[] values = parameters.get(parameter);
+//              System.out.println( parameter + "" + values[0] );
+//                 
+//             }; 
+                Map map = request.getParameterMap();
+    for (Object key: map.keySet())
+    {
+            String keyStr = (String)key;
+            
+            String[] value = (String[])map.get(keyStr);
+            
+    pw.println("parametro " + (String)key + "   =   " + Arrays.toString(value) + " <br>") ;
+    pw.println();
+    }
+                break;
+                
+            case "eliminar":
+                break;
+                
         }
     }
 

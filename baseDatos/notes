@@ -1,0 +1,106 @@
+Programa permita introducir nº mes y nº de multas hasta que no deseemos introducir mas datos, momento en el que nos mostrara los nombres de los meses ordenadors ascendentemente segun nº de multas.
+Se pueden repetir nº de multas.
+Debe controlarse que el nº de mes esta comprendido entre 1 y 12.
+
+
+Despliegue de aplicaciones web, Gazela.
+Evaluacion = examen * 0,6 + ejercicio*0,3+ actitud *0,1
+
+Juan pc 192.168.78.63
+smb:// daw
+pwd a
+alumno_daw
+nohay2sin3
+
+\\192.168.97.21
+\\DEPT_INFO_JORGE
+
+w2012 jorge
+administrador - Flotante1
+
+192.168.96.1
+profe
+nohay2sin3
+
+Trabajo:
+portada y contraportada, titulo y objetivo
+-diseñar pagina web de la intranet tierno galvan
+usuario y contraseña
+notas, cuentas, privadas
+
+-paginas consultadas e ideas obtenidas
+-tratamiento de imagenes
+(reduccion, tamaño...)
+
+-etiquetas html5
+
+-css utilizado
+medidas em, %...
+
+-rwd
+media
+clases %
+
+-herramientas utilizadas
+validacion correcta
+
+-checkear la pagina para varios dispositivos
+movil first
+
+https://15378-presscdn-0-14-pagely.netdna-ssl.com/wp-content/uploads/2015/11/9-engaging-intranet-design-examples-beyond-the-homepage-Interact-Community-background-1024x576.png
+
+https://axerosolutions.com/attachment?file=55wtFsn3HBpMxHz75wLNyw%3D%3D
+
+https://axerosolutions.com/attachment?file=a1BQU5ympJM%2BOLItKQoMng%3D%3D
+
+https://axerosolutions.com/attachment?file=IlUW4B49kFt1AzAh21ZHhA%3D%3D
+
+https://axerosolutions.com/attachment?file=JHam6HcDbdBfTE9Fp3wI3w%3D%3D
+
+https://axerosolutions.com/attachment?file=I0dKW8VvdJHfNKhf296kHg%3D%3D
+
+https://axerosolutions.com/attachment?file=OcweMNZ4LgdKCl2VgpPZxg%3D%3D
+
+http://intranet.ecu.edu.au/student/overview
+
+https://athemes.com/collections/best-intranet-wordpress-themes/
+
+http://thrive-demo.dunhakdis.me/thrive-intranet-extranet-wordpress-theme/img/Thrive-Devices.PNG
+
+https://www.interact-intranet.com/product/features/interact-mobile-intranet/
+https://www.flickr.com/photos/thoughtfarmer/5190378422/in/photostream/
+
+
+Sin registro no accesible
+Segun Estudiante o Profesor distinta pagina
+
+Menu
+Home (S solo noticias) (X noticias, perfil + dashboard global) 
+
+Perfil (S solo perfil) (X Perfil+noticias)
+Departamento (Muestra los departamentos que pertenezca el usuario DAW/Direccion...)
+Dentro estara Noticias, dashboard, incidencias, presupuesto.. etc
+
+Comunicacion
+-Personal (Abrira departamentos y/o perfiles)
+-Global (dashboard)
+Eventos (S solo calendario)
+
+16 octubre
+
+menus
+https://tympanus.net/codrops/2013/04/19/responsive-multi-level-menu/
+https://envato.com/blog/css-snippets-responsive-menus/
+https://codepen.io/Fallupko/pen/ruLdg
+https://codepen.io/oknoblich/pen/EAzBc
+https://codepen.io/joe-watkins/pen/Emzxf
+
+responsive menu
+facil
+https://codepen.io/massiebn/pen/KrJvi
+
+aprender multicapas faltan efectos
+https://codepen.io/joe-watkins/pen/Emzxf
+
+multinivel con boton
+https://codepen.io/stephaniewalter/pen/kficJ
