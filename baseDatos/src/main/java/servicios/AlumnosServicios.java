@@ -36,4 +36,14 @@ public class AlumnosServicios {
         return dao.insertAlumnoJDBC(alumnoNuevo);
     }
     
+    public Alumno delAlumno(Alumno alumnoDel){
+        AlumnosDAO dao = new AlumnosDAO();
+        
+        return dao.delUser(alumnoDel);
+    }
+       public Alumno updAlumno(Alumno alumnoUpd){
+        AlumnosDAO dao = new AlumnosDAO();
+        
+        return dao.updateUser(alumnoUpd);
+    }
 }

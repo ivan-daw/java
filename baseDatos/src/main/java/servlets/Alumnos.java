@@ -75,27 +75,58 @@ public class Alumnos extends HttpServlet {
                 break;     
                 
             case "update":
-                     response.setContentType("text/html"); 
-    PrintWriter pw=response.getWriter();    
-//             for  (String nombre : request.getParameterMap().keySet()){
-//                 String[] values = parameters.get(parameter);
-//              System.out.println( parameter + "" + values[0] );
-//                 
-//             }; 
-                Map map = request.getParameterMap();
-    for (Object key: map.keySet())
-    {
-            String keyStr = (String)key;
-            
-            String[] value = (String[])map.get(keyStr);
-            
-    pw.println("parametro " + (String)key + "   =   " + Arrays.toString(value) + " <br>") ;
-    pw.println();
-    }
-                break;
+                   Alumno e = new Alumno();
+                  int mid = Integer.parseInt(request.getParameter("id"));
+               e.setId(mid);
+               e.setNombre(request.getParameter("nombre"));
+              LocalDate local2 = LocalDate.of(2910, Month.MARCH, 12);
+                e.setFecha_nacimiento(Date.from(local2.atStartOfDay().toInstant(ZoneOffset.UTC)));
+                 e.setMayor_edad( Boolean.valueOf(request.getParameter("mayor")));
+              e = as.updAlumno(e);
+               
+                List<Alumno> alumnosupd = new ArrayList();
+                alumnosupd.add(e);
+                 
+                     request.setAttribute("alumnos", alumnosupd);
+              
+                request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+                break;     
+
+                
+//                     response.setContentType("text/html"); 
+//    PrintWriter pw=response.getWriter();    
+////             for  (String nombre : request.getParameterMap().keySet()){
+////                 String[] values = parameters.get(parameter);
+////              System.out.println( parameter + "" + values[0] );
+////                 
+////             }; 
+//                Map map = request.getParameterMap();
+//    for (Object key: map.keySet())
+//    {
+//            String keyStr = (String)key;
+//            
+//            String[] value = (String[])map.get(keyStr);
+//            
+//    pw.println("parametro " + (String)key + "   =   " + Arrays.toString(value) + " <br>") ;
+//    pw.println();
+//    }
+              //  break;
                 
             case "eliminar":
-                break;
+                  Alumno u = new Alumno();
+                  mid = Integer.parseInt(request.getParameter("id"));
+               u.setId(mid);
+             
+              u = as.delAlumno(u);
+               
+                List<Alumno> alumnosdel = new ArrayList();
+                alumnosdel.add(u);
+                 
+                     request.setAttribute("alumnos", alumnosdel);
+              
+                request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+                break;     
+
                 
         }
     }
