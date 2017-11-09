@@ -23,6 +23,7 @@ import model.Alumno;
 import servicios.AlumnosServicios;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
@@ -64,7 +65,14 @@ public class Alumnos extends HttpServlet {
             case "insertar":
                 Alumno a = new Alumno();
                 a.setNombre(request.getParameter("nombre"));
-                LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
+               // LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
+             //   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+                      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
+
+
+String date=request.getParameter("fecha");
+        LocalDate local = LocalDate.parse(date, formatter);
+
                 a.setFecha_nacimiento(Date.from(local.atStartOfDay().toInstant(ZoneOffset.UTC)));
                 a.setMayor_edad( Boolean.valueOf(request.getParameter("mayor"))); //parse a boleean
                 a = as.addAlumno(a);
@@ -79,7 +87,12 @@ public class Alumnos extends HttpServlet {
                   int mid = Integer.parseInt(request.getParameter("id"));
                e.setId(mid);
                e.setNombre(request.getParameter("nombre"));
-              LocalDate local2 = LocalDate.of(2910, Month.MARCH, 12);
+                  DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d-MM-yyyy");
+
+
+String date2=request.getParameter("fecha");
+        LocalDate local2 = LocalDate.parse(date2, formatter2);
+            
                 e.setFecha_nacimiento(Date.from(local2.atStartOfDay().toInstant(ZoneOffset.UTC)));
                  e.setMayor_edad( Boolean.valueOf(request.getParameter("mayor")));
               e = as.updAlumno(e);

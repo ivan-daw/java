@@ -116,8 +116,65 @@ public class AlumnosDAO {
 
         return a;
     }
+    
+    
+   public Alumno updUser(Alumno a) {
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        try {
+            con = db.getConnection();
+            PreparedStatement stmt = con.prepareStatement( "UPDATE ALUMNOS SET NOMBRE=?, FECHA_NACIMIENTO=?, MAYOR_EDAD=? WHERE ID=?", Statement.RETURN_GENERATED_KEYS);
+stmt.setString(1, a.getNombre());
+            stmt.setDate(2, new java.sql.Date(a.getFecha_nacimiento().getTime()));
+            stmt.setBoolean(3, a.getMayor_edad());
+            stmt.setInt(4, (int) a.getId());
+          
+            
+            int filas = stmt.executeUpdate();
+            
 
- 
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                a.setId(rs.getInt(1));
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.cerrarConexion(con);
+        }
+
+        return a;
+    }
+    
+
+   public Alumno delUser(Alumno a) {
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        try {
+            con = db.getConnection();
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM ALUMNOS WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setInt(1, (int) a.getId());
+          
+            
+            int filas = stmt.executeUpdate();
+            
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                a.setId(rs.getInt(1));
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.cerrarConexion(con);
+        }
+
+        return a;
+    }
+
 
 
   

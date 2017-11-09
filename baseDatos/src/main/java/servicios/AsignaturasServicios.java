@@ -17,25 +17,25 @@ public class AsignaturasServicios {
     
     
     
-//    public List<Asignatura> getAllAsignaturas()
-//    {
-//        AsignaturasDAO dao = new AsignaturasDAO();
-//        
-//        return dao.getAllAsignaturasJDBC();
-//    }
-//    
+    public List<Asignatura> getAllAsignaturas()
+    {
+        AsignaturasDAO dao = new AsignaturasDAO();
+        
+        return dao.getAllAsignaturas();
+    }
+    
     public Asignatura getAsignaturaById(int id){
         AsignaturasDAO dao = new AsignaturasDAO();
         
         return dao.getUserById(id);
         
     }
-//    public Asignatura addAsignatura(Asignatura alumnoNuevo)
-//    {
-//        AsignaturasDAO dao = new AsignaturasDAO();
-//        
-//        return dao.insertAsignaturaJDBC(alumnoNuevo);
-//    }
+    public Asignatura addAsignatura(Asignatura alumnoNuevo)
+    {
+        AsignaturasDAO dao = new AsignaturasDAO();
+        
+        return dao.insertAsignatura(alumnoNuevo);
+    }
     
     public Asignatura delAsignatura(Asignatura asignaturaDel){
         AsignaturasDAO dao = new AsignaturasDAO();

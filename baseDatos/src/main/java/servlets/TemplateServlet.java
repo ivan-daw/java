@@ -47,7 +47,7 @@ public class TemplateServlet extends HttpServlet {
             root.put("content","hola");
              AlumnosServicios as = new AlumnosServicios();
              List<Alumno> alumnos = new ArrayList();
-             alumnos.add(as.getAlumnoById(1));
+           //  alumnos.add(as.getAlumnoById(1));
              root.put("alumnos",alumnos);
             temp.process(root, response.getWriter());
         } catch (TemplateException ex) {

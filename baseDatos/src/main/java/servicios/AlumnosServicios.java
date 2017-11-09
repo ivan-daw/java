@@ -23,12 +23,12 @@ public class AlumnosServicios {
         return dao.getAllAlumnosJDBC();
     }
     
-    public Alumno getAlumnoById(int id){
-        AlumnosDAO dao = new AlumnosDAO();
-        
-        return dao.getUserById(id);
-        
-    }
+//    public Alumno getAlumnoById(int id){
+//        AlumnosDAO dao = new AlumnosDAO();
+//        
+//        return dao.getUserById(id);
+//        
+//    }
     public Alumno addAlumno(Alumno alumnoNuevo)
     {
         AlumnosDAO dao = new AlumnosDAO();
@@ -44,6 +44,6 @@ public class AlumnosServicios {
        public Alumno updAlumno(Alumno alumnoUpd){
         AlumnosDAO dao = new AlumnosDAO();
         
-        return dao.updateUser(alumnoUpd);
+        return dao.updUser(alumnoUpd);
     }
 }
