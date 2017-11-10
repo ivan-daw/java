@@ -44,14 +44,14 @@ public class Asignaturas extends HttpServlet {
 
        
       
-         AsignaturasServicios as = new AsignaturasServicios();
+         AsignaturasServicios asig = new AsignaturasServicios();
      
         String op = request.getParameter("op");
              if (op==null) op="listar";
         switch (op) {
             case "listar":
                
-                request.setAttribute("asignaturas", as.getAllAsignaturas());
+                request.setAttribute("asignaturas", asig.getAllAsignaturas());
                 request.getRequestDispatcher("pintarListaAsignaturas.jsp").forward(request, response);
                 break;
             case "insertar":
@@ -60,7 +60,7 @@ public class Asignaturas extends HttpServlet {
              
                 a.setCurso(request.getParameter("curso"));
                 a.setCiclo(request.getParameter("ciclo"));
-                a = as.addAsignatura(a);
+                a = asig.addAsignatura(a);
                 List<Asignatura> asignaturas = new ArrayList();
                 asignaturas.add(a);
                 request.setAttribute("asignaturas",asignaturas);
@@ -76,7 +76,7 @@ public class Asignaturas extends HttpServlet {
              
                 e.setCurso(request.getParameter("curso"));
                 e.setCiclo(request.getParameter("ciclo"));
-              e = as.updAsignatura(e);
+              e = asig.updAsignatura(e);
                
                 List<Asignatura> asignaturasupd = new ArrayList();
                 asignaturasupd.add(e);
@@ -91,7 +91,7 @@ public class Asignaturas extends HttpServlet {
                   mid = Integer.parseInt(request.getParameter("id"));
                u.setId(mid);
              
-              u = as.delAsignatura(u);
+              u = asig.delAsignatura(u);
                
                 List<Asignatura> asignaturasdel = new ArrayList();
                 asignaturasdel.add(u);

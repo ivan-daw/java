@@ -14,32 +14,32 @@ package model;
  * @author Ivan
  */
 public class Nota {
-    private int ID_ALUMNO;
-    private int ID_ASIGNATURA;
-    private int NOTA;
+    private int id_alumno;
+    private int id_asignatura;
+    private int nota;
 
-    public int getID_ALUMNO() {
-        return ID_ALUMNO;
+    public int getId_alumno() {
+        return id_alumno;
     }
 
-    public void setID_ALUMNO(int ID_ALUMNO) {
-        this.ID_ALUMNO = ID_ALUMNO;
+    public void setId_alumno(int id_alumno) {
+        this.id_alumno = id_alumno;
     }
 
-    public int getID_ASIGNATURA() {
-        return ID_ASIGNATURA;
+    public int getId_asignatura() {
+        return id_asignatura;
     }
 
-    public void setID_ASIGNATURA(int ID_ASIGNATURA) {
-        this.ID_ASIGNATURA = ID_ASIGNATURA;
+    public void setId_asignatura(int id_asignatura) {
+        this.id_asignatura = id_asignatura;
     }
 
-    public int getNOTA() {
-        return NOTA;
+    public int getNota() {
+        return nota;
     }
 
-    public void setNOTA(int NOTA) {
-        this.NOTA = NOTA;
+    public void setNota(int nota) {
+        this.nota = nota;
     }
 
     

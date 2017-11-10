@@ -41,55 +41,43 @@
 
     </head>
     <body>
-        <h1>Asignaturas</h1>
+        <h1>Notas</h1>
         pruebaCTE: <%= Constantes.PRUEBA%> <br>
-        <table border="1">
-            <c:forEach items="${asignaturas}" var="asignatura">  
-                <tr>
-                    <td>
-                          <input type="button" value="cargar ${alumno.id}" 
-                               onclick="cargarAsignatura('${alumno.id}',
-                                               '${alumno.nombre}'
-                                             "/>
-                        
-                    </td>
-                    <td>
-                        ${alumno.nombre}
-                    </td>
-                    
-                    <td>
-                        
-                        <input type="button" value="cargar ${asignatura.id}" 
-                               onclick="cargarAsignatura('${asignatura.id}',
-                                               '${asignatura.nombre}'
-                                               "/>
-                    </td> 
-                    <td>
-                        ${asignatura.nombre}
-                    </td>
-    <input type="button" value="cargar ${nota.nota}" 
-                               onclick="cargarAsignatura('${nota.nota}'
-                                               
-                                               "/>
-    
-    <td>
-        ${nota.nota}
-    </td>
-                    </tr>
+ 
+            
 
 
-            </c:forEach> 
 
-        </table>
         <form action="notas" name="formulario3" method="get" >
+            
+                        
+                  <select id="selectalumnos" name="selectalumnos">
+ <c:forEach items="${alumnos}" var="alumnos">  
+  <option value=${alumnos.id}>${alumnos.nombre}</option>
+  </c:forEach> 
+</select>
+            
+
+           
+                  <select id="selectasignaturas" name="selectasignaturas">
+ <c:forEach items="${asignaturas}" var="asignaturas">  
+  <option value=${asignaturas.id}>${asignaturas.nombre}</option>
+  </c:forEach> 
+</select>
+                     <c:forEach items="${notas}" var="notas">  
+                <c:out value = "${notas.nota}"/>
+               </c:forEach> 
+                
+            <br>
+ 
             <input type="hidden" name ="op" id="op" value="test"/>
-            <input type="hidden" name="id" id="idasignatura" />
-              <input type="hidden" name="id" id="idalumno" />
-            <input type="text" name="nombrereal" id="nombreal" size="12"/>
-                  <input type="text" name="nombreasig" id="nombreasig" size="12"/>
-            <input type="text" name="nota" id="nota" size="12"/>
+            <input type="hidden" name="idasig" id="idasignatura" />
+              <input type="hidden" name="idalum" id="idalumno" />
+           
+          NOTA  <input type="text" name="nota" id="nota" size="12"/>
             <br>
             <!--servelets alumnos.java-->
+            <button id="ver" onclick="myFunction(id)">Ver</button>
             <button id="listar" onclick="myFunction(id)">Listar</button>
             <button id="insertar" onclick="return myFunction(id)">Insert</button>
             <button id="update" onclick="myFunction(id)">Update</button>

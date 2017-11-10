@@ -27,19 +27,18 @@ public class NotasDAO {
       
     
     public Nota getUserById(Nota u) {
+ 
         Nota user = null;
         DBConnection db = new DBConnection();
-
         Connection con = null;
         try {
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("jdbc/db4free");
-            con = ds.getConnection();
+            con = db.getConnection();
             QueryRunner qr = new QueryRunner();
             ResultSetHandler<Nota> h
                     = new BeanHandler<>(Nota.class);
-            user = qr.query(con, "select * FROM NOTAS where ID_ALUMNO = ? AND ID_ASIGNATURA = ?", h, 
-                    u.getID_ALUMNO(), u.getID_ASIGNATURA());
+             user = qr.query(con, "select * FROM NOTAS where ID_ALUMNO = ? AND ID_ASIGNATURA = ?", h, 
+                    u.getId_alumno(), u.getId_asignatura());
+            
         } catch (Exception ex) {
             Logger.getLogger(NotasDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -47,6 +46,28 @@ public class NotasDAO {
         }
         return user;
     }
+
+        
+//        Nota user = null;
+//        DBConnection db = new DBConnection();
+//
+//        Connection con = null;
+//        try {
+//            Context ctx = new InitialContext();
+//            DataSource ds = (DataSource) ctx.lookup("jdbc/db4free");
+//            con = ds.getConnection();
+//            QueryRunner qr = new QueryRunner();
+//            ResultSetHandler<Nota> h
+//                    = new BeanHandler<>(Nota.class);
+//            user = qr.query(con, "select * FROM NOTAS where ID_ALUMNO = ? AND ID_ASIGNATURA = ?", h, 
+//                    u.getId_alumno(), u.getId_asignatura());
+//        } catch (Exception ex) {
+//            Logger.getLogger(NotasDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            db.cerrarConexion(con);
+//        }
+//        return user;
+    
 //
 //       public Nota getUser(Nota userOriginal) {
 //        Nota user = null;
@@ -66,6 +87,7 @@ public class NotasDAO {
 //        return user;
 //    }
 //    
+
     public List<Nota> getAllNotas() {
         List<Nota> lista = null;
         DBConnection db = new DBConnection();
@@ -94,7 +116,7 @@ public class NotasDAO {
 
             int filas = qr.update(con,
                     "DELETE FROM NOTAS WHERE ID_ALUMNO = ? AND ID_ASIGNATURA = ?",
-                    u.getID_ALUMNO(), u.getID_ASIGNATURA());
+                    u.getId_alumno(), u.getId_asignatura());
 
         } catch (Exception ex) {
             Logger.getLogger(NotasDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,7 +135,7 @@ public class NotasDAO {
 
             int filas = qr.update(con,
                     "UPDATE NOTAS SET NOTA=? WHERE ID_ALUMNO = ? AND ID_ASIGNATURA = ?",
-                    u.getNOTA(), u.getID_ALUMNO(), u.getID_ASIGNATURA());
+                    u.getNota(), u.getId_alumno(), u.getId_asignatura());
             
 
         } catch (Exception ex) {
@@ -134,7 +156,7 @@ public class NotasDAO {
 
             int filas = qr.update(con,
                     "INSERT INTO NOTAS (ID_ALUMNO, ID_ASIGNATURA, NOTA) VALUES(?,?,?)",
-                    u.getID_ALUMNO(), u.getID_ASIGNATURA(), u.getNOTA());
+                    u.getId_alumno(), u.getId_asignatura(), u.getNota());
             
 
         } catch (Exception ex) {

@@ -15,12 +15,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Nota;
+import servicios.AlumnosServicios;
 import servicios.NotasServicios;
+import servicios.AsignaturasServicios;
 
 /**
  *
  * @author Ivan
+ * SQLException texto (mensaje / numero) equals para comprobar
+ * ask si seguro
+ * delborrar y todas sus notas usuario
+ * transacion
+ * con.setAutoCommit(false);
+ * if (con!= null) con.rollback();
+ * rollback en catch
+ * SQLIntegrityConstraintViolationException
  */
+
 @WebServlet(name = "Notas", urlPatterns = {"/notas"})
 public class Notas extends HttpServlet {
 
@@ -36,25 +47,46 @@ public class Notas extends HttpServlet {
   
            protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         
-      
-         NotasServicios ns= new NotasServicios();
+         AlumnosServicios as = new AlumnosServicios();
+         AsignaturasServicios asig = new AsignaturasServicios();         
+         NotasServicios ns = new NotasServicios();
      
         String op = request.getParameter("op");
              if (op==null) op="listar";
         switch (op) {
             case "listar":
-               
+                 request.setAttribute("alumnos", as.getAllAlumnos());
+                      request.setAttribute("asignaturas", asig.getAllAsignaturas());
                 request.setAttribute("notas", ns.getAllNotas());
                 request.getRequestDispatcher("pintarListaNotas.jsp").forward(request, response);
                 break;
+                
+            case "ver":
+                
+                         Nota e = new Nota();
+
+                e.setId_alumno(Integer.parseInt(request.getParameter("selectalumnos")));
+             
+                 e.setId_asignatura(Integer.parseInt(request.getParameter("selectasignaturas")));
+                //e.setNota(Integer.parseInt(request.getParameter("nota")));
+              e = ns.getNotaById(e);
+               
+                List<Nota> notasver = new ArrayList();
+                notasver.add(e);
+                 
+                     request.setAttribute("notas", notasver);
+              
+                request.getRequestDispatcher("pintarListaNotas.jsp").forward(request, response);
+                break;     
+                
+                
             case "insertar":
                 Nota a = new Nota();
-                a.setID_ALUMNO(Integer.parseInt(request.getParameter("idalumno")));
+                a.setId_alumno(Integer.parseInt(request.getParameter("selectalumnos")));
              
-                 a.setID_ASIGNATURA(Integer.parseInt(request.getParameter("idasignatura")));
-                a.setNOTA(Integer.parseInt(request.getParameter("nota")));
+                 a.setId_asignatura(Integer.parseInt(request.getParameter("selectasignaturas")));
+                a.setNota(Integer.parseInt(request.getParameter("nota")));
                 a = ns.addNota(a);
                 List<Nota> notas = new ArrayList();
                 notas.add(a);
@@ -63,16 +95,16 @@ public class Notas extends HttpServlet {
                 break;     
                 
             case "update":
-                   Nota e = new Nota();
+                   Nota w = new Nota();
 
-                e.setID_ALUMNO(Integer.parseInt(request.getParameter("idalumno")));
+                w.setId_alumno(Integer.parseInt(request.getParameter("selectalumnos")));
              
-                 e.setID_ASIGNATURA(Integer.parseInt(request.getParameter("idasignatura")));
-                e.setNOTA(Integer.parseInt(request.getParameter("nota")));
-              e = ns.updNota(e);
+                 w.setId_asignatura(Integer.parseInt(request.getParameter("selectasignaturas")));
+                w.setNota(Integer.parseInt(request.getParameter("nota")));
+              w = ns.updNota(w);
                
                 List<Nota> notasupd = new ArrayList();
-                notasupd.add(e);
+                notasupd.add(w);
                  
                      request.setAttribute("notas", notasupd);
               
@@ -81,9 +113,9 @@ public class Notas extends HttpServlet {
                 
                   case "eliminar":
                   Nota u = new Nota();
-                   u.setID_ALUMNO(Integer.parseInt(request.getParameter("idalumno")));
+                   u.setId_alumno(Integer.parseInt(request.getParameter("selectalumnos")));
              
-                 u.setID_ASIGNATURA(Integer.parseInt(request.getParameter("idasignatura")));
+                 u.setId_asignatura(Integer.parseInt(request.getParameter("selectasignaturas")));
               
               u = ns.delNota(u);
                
